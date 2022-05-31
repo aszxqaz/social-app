@@ -1,7 +1,7 @@
 import { error } from 'console'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { User } from '../../entities/User'
-import { dataSource } from '../../typeorm/setup'
+import { userService } from '../../typeorm/setup'
 
 export interface RegistrationError {
 	name: 'username' | 'password' | 'email'
@@ -10,19 +10,14 @@ export interface RegistrationError {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	console.log('here')
-	if (!dataSource.isInitialized) {
-		await dataSource.initialize()
-		console.log('Data Source initialized')
-	}
 	const { email, username, password } = req.body
-  console.log(`req.body: `, req)
+	console.log(`req.body: `, req)
 	const errors: RegistrationError[] = []
-	const repo = dataSource.getRepository(User)
 
-	const emailInUse = await repo.findOne({ where: { email } })
+	const emailInUse = await userService.findUser({ email })
 	if (emailInUse) errors.push({ name: 'email', message: 'Email is already in use.' })
 
-	const usernameInUse = await repo.findOne({ where: { username } })
+	const usernameInUse = await userService.findUser({ username })
 	if (usernameInUse) errors.push({ name: 'username', message: 'Username is already in use.' })
 
 	if (errors.length)
@@ -32,13 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			errors,
 		})
 
-	const user = await repo
-		.create({
-			email,
-			username,
-			password,
-		})
-		.save()
+	const user = await userService.createUser({
+		email,
+		username,
+		password,
+	})
 
 	res.status(200).json({
 		statusCode: 201,
