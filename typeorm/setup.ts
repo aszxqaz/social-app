@@ -15,7 +15,7 @@ class UserService {
 			port: 5432,
 			logging: process.env.NODE_ENV !== 'production',
 			entities: [User],
-			synchronize: process.env.NODE_ENV !== 'production',
+			synchronize: true,
 		})
 		this.userRepo = this.dataSource.getRepository(User)
 	}
