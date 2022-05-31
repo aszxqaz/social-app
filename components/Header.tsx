@@ -38,7 +38,6 @@ const Header: React.FC<HeaderProps> = ({}) => {
 					const linkStyle: LinkProps = {
 						textColor: item.active ? 'white' : 'whiteAlpha.500',
 						textTransform: 'uppercase',
-						fontSize: 'md',
 					}
 
 					return (

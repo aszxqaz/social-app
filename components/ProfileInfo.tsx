@@ -24,12 +24,12 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ image, fullname, online }) =>
 				<Image src={image} width="60px" height="60px" objectFit="cover" />
 			</Flex>
 			<Flex alignItems="center" justifyContent="left" flexGrow={1} pl={5}>
-				<Text fontSize="xl">{fullname}</Text>
+				<Text>{fullname}</Text>
 			</Flex>
 			<Flex alignItems="center" justifyContent="left" pl={5}>
 				<Flex gap={3} alignItems="center" justifyContent="left"  >
-					<Switch colorScheme="green" size="lg" isChecked={online} />
-					<Text fontSize="xl" textColor={switchStyle.textColor}>{switchStyle.text}</Text>
+					<Switch colorScheme="green" isChecked={online} />
+					<Text textColor={switchStyle.textColor}>{switchStyle.text}</Text>
 				</Flex>
 			</Flex>
 		</Flex>

@@ -33,17 +33,16 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 	console.log('index page session: ', JSON.stringify(token))
 
-  if (!token) return {
-    props: {}
-  }
+	if (!token)
+		return {
+			props: {},
+		}
 
 	return {
 		props: {
 			profilePageProps: {
 				fullname: token?.name!,
-				image:
-					token?.picture ||
-					'https://www.google.com/search?q=bear&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjLiZKExor4AhUhx4sKHWcaDOwQ_AUoAXhttps://upload.wikimedia.org/wikipedia/commons/9/9e/Ours_brun_parcanimalierpyrenees_1.jpg',
+				image: '/me.jpg' || token?.picture,
 				online: true,
 			},
 		},
