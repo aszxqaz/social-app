@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
 				<Flex gap={4}>
 					{headerToolsContent.map((item) => {
 						const Icon = item.icon
-						return <Icon fontSize="2.5rem" />
+						return <Icon key={item.icon.name} fontSize="2.5rem" />
 					})}
 				</Flex>
 			</Flex>
@@ -43,6 +43,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
 
 					return (
 						<Flex
+              key={item.title}
               pb={3}
 							onClick={() => {
 								item.active = true
