@@ -28,10 +28,14 @@ const Home: NextPage<HomePageProps> = ({ profilePageProps }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({
 	req,
-}): Promise<{ props: HomePageProps }> => {
+}): Promise<{ props: HomePageProps } | { props: {} }> => {
 	const token = await getToken({ req } as { req: any })
 
 	console.log('index page session: ', JSON.stringify(token))
+
+  if (!token) return {
+    props: {}
+  }
 
 	return {
 		props: {
