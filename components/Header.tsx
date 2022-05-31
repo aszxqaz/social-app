@@ -18,12 +18,12 @@ const Header: React.FC<HeaderProps> = ({}) => {
 			gap={3}>
 			<Flex alignItems="center" p={3}>
 				<Box flexGrow={1}>
-					<Heading fontSize="2rem">Social Application</Heading>
+					<Heading size="md">Social Application</Heading>
 				</Box>
 				<Flex gap={4}>
 					{headerToolsContent.map((item) => {
 						const Icon = item.icon
-						return <Icon key={item.icon.name} fontSize="2.5rem" />
+						return <Icon key={item.icon.name} fontSize="1.5rem" />
 					})}
 				</Flex>
 			</Flex>
@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
 					const linkStyle: LinkProps = {
 						textColor: item.active ? 'white' : 'whiteAlpha.500',
 						textTransform: 'uppercase',
-						fontSize: '1.5rem',
+						fontSize: 'md',
 					}
 
 					return (
