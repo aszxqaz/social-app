@@ -1,7 +1,5 @@
-import { error } from 'console'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { User } from '../../entities/User'
-import { userService } from '../../typeorm/setup'
+import { userService } from '../../typeorm'
 
 export interface RegistrationError {
 	name: 'username' | 'password' | 'email'
@@ -27,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			errors,
 		})
 
-	const user = await userService.createUser({
+	await userService.createUser({
 		email,
 		username,
 		password,

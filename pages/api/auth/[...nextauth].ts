@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
-import { userService } from '../../../typeorm/setup'
+import { userService } from '../../../typeorm'
 import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter'
 import { Redis } from '@upstash/redis'
 

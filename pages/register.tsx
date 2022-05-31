@@ -1,25 +1,23 @@
 import {
+	Box,
 	Button,
+	Center,
 	Container,
 	Flex,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Heading,
-	Link,
 	Input,
+	Link,
 	Text,
-	VStack,
-	Center,
-	Box,
 } from '@chakra-ui/react'
-import axios from 'axios'
+import { axios } from '../axios'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import { default as NextLink } from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import useSWR, { useSWRConfig } from 'swr'
 import { useAuthRedirect } from '../hooks/useAuthRedirect'
 import { emailRegExp } from '../utils/email-regexp'
 import { RegistrationError } from './api/register'
@@ -52,7 +50,7 @@ const Register: React.FC = ({}) => {
 	const submitHandler: SubmitHandler<SignUpData> = async (data) => {
 		setSignUpStatus('submitting')
 		try {
-			const res = await axios.post('http://localhost:3000/api/register', data)
+			const res = await axios.post('/api/register', data)
 			setSignUpStatus('success')
 		} catch (e: any) {
 			const errors: RegistrationError[] = e.response.data.errors

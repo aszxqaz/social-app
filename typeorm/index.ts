@@ -8,10 +8,10 @@ class UserService {
 	constructor() {
 		this.dataSource = new DataSource({
 			type: 'postgres',
-			database: 'postgres',
-			username: 'postgres',
-			password: 'kY1cu2ImCtEoL4mlhRv9aH7ReP7HQVhF',
-			host: 'db.cvmmvqklawjoptbvcact.supabase.co',
+			database: process.env.TYPEORM_DATABASE,
+			username: process.env.TYPEORM_USERNAME,
+			password: process.env.TYPEORM_PASSWORD,
+			host: process.env.TYPEORM_HOST,
 			port: 5432,
 			logging: process.env.NODE_ENV !== 'production',
 			entities: [User],
