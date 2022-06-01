@@ -1,22 +1,13 @@
 import { DataSource, DeepPartial, FindOptionsWhere, Repository } from 'typeorm'
 import { User } from '../entities/User'
+import { getDataSourceOptions } from './getDataSourceOptions'
 
 class UserService {
 	private dataSource: DataSource
 	private userRepo: Repository<User>
 
 	constructor() {
-		this.dataSource = new DataSource({
-			type: 'postgres',
-			database: process.env.TYPEORM_DATABASE,
-			username: process.env.TYPEORM_USERNAME,
-			password: process.env.TYPEORM_PASSWORD,
-			host: process.env.TYPEORM_HOST,
-			port: 5432,
-			logging: process.env.NODE_ENV !== 'production',
-			entities: [User],
-			synchronize: true,
-		})
+		this.dataSource = new DataSource(getDataSourceOptions([User]))
 		this.userRepo = this.dataSource.getRepository(User)
 	}
 

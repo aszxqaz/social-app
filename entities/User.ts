@@ -2,11 +2,14 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class User extends BaseEntity {
-	@PrimaryGeneratedColumn()
-	id!: number
+	@PrimaryGeneratedColumn('uuid')
+	id!: string
 
 	@Column('varchar', { length: 30 })
-	username!: string
+	firstName!: string
+	
+  @Column('varchar', { length: 30 })
+	lastName!: string
 
 	@Column('varchar', { length: 30 })
 	email!: string

@@ -15,22 +15,17 @@ export default NextAuth({
 	providers: [
 		Credentials({
 			credentials: {
-				emailOrUsername: { type: 'text' },
+				email: { type: 'text' },
 				password: { type: 'password' },
 			},
 			async authorize(credentials, req) {
-				console.log(credentials)
-				console.log(req)
 				if (!credentials) return null
-				const { emailOrUsername, password } = credentials
-				const user = await userService.findUser([
-					{ email: emailOrUsername },
-					{ username: emailOrUsername },
-				])
+				const { email, password } = credentials
+				const user = await userService.findUser([{ email }])
 				if (!user) return null
 				if (user.password === credentials.password)
 					return {
-						name: user.username,
+						name: `${user.firstName} ${user.lastName}`,
 						id: user.id,
 						image: user.images?.[0] || null,
 					}
@@ -43,13 +38,13 @@ export default NextAuth({
 	},
 	callbacks: {
 		jwt: ({ token, user, account, profile, isNewUser }) => {
-			console.log(`--- Jwt callback`)
-			console.log(`token: ${JSON.stringify(token)}`)
-			console.log(`user: ${JSON.stringify(user)}`)
-			console.log(`account: ${JSON.stringify(account)}`)
-			console.log(`profile: ${JSON.stringify(profile)}`)
-			console.log(`isNewUser: ${JSON.stringify(isNewUser)}`)
-			console.log(` `)
+			// console.log(`--- Jwt callback`)
+			// console.log(`token: ${JSON.stringify(token)}`)
+			// console.log(`user: ${JSON.stringify(user)}`)
+			// console.log(`account: ${JSON.stringify(account)}`)
+			// console.log(`profile: ${JSON.stringify(profile)}`)
+			// console.log(`isNewUser: ${JSON.stringify(isNewUser)}`)
+			// console.log(` `)
 			// if (user) {
 			// 	token.sub = user.id
 			// 	token.name = user.name
@@ -58,11 +53,11 @@ export default NextAuth({
 			return token
 		},
 		session: ({ session, user, token }) => {
-			console.log(`--- Session callback`)
-			console.log(`session: ${JSON.stringify(session)}`)
-			console.log(`user: ${JSON.stringify(user)}`)
-			console.log(`token: ${JSON.stringify(token)}`)
-			console.log(` `)
+			// console.log(`--- Session callback`)
+			// console.log(`session: ${JSON.stringify(session)}`)
+			// console.log(`user: ${JSON.stringify(user)}`)
+			// console.log(`token: ${JSON.stringify(token)}`)
+			// console.log(` `)
 			// if (token) {
 			// 	session.id = token.id
 			// }

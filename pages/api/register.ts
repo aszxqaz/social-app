@@ -1,22 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { SignUpData } from '../../components/Register'
 import { userService } from '../../typeorm'
 
 export interface RegistrationError {
-	name: 'username' | 'password' | 'email'
+	name: keyof SignUpData
 	message: string
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	console.log('here')
-	const { email, username, password } = req.body
-	console.log(`req.body: `, req)
+	const { email, firstName, lastName, password } = req.body
 	const errors: RegistrationError[] = []
 
 	const emailInUse = await userService.findUser({ email })
 	if (emailInUse) errors.push({ name: 'email', message: 'Email is already in use.' })
-
-	const usernameInUse = await userService.findUser({ username })
-	if (usernameInUse) errors.push({ name: 'username', message: 'Username is already in use.' })
 
 	if (errors.length)
 		return res.status(400).json({
@@ -27,7 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	await userService.createUser({
 		email,
-		username,
+		firstName,
+		lastName,
 		password,
 	})
 

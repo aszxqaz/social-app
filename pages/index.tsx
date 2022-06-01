@@ -9,12 +9,8 @@ interface HomePageProps {
 }
 
 const Home: NextPage<HomePageProps> = ({ profilePageProps }) => {
-	const { status } = useAuthRedirect({
-		whenAuthenticated: null,
-		whenNotAuthenticated: '/login',
-	})
-
-	// const token = getToken
+	const { status } = useAuthRedirect('/login')
+  console.log(status)
 
 	if (status === 'authenticated')
 		return (
@@ -31,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }): Promise<{ props: HomePageProps } | { props: {} }> => {
 	const token = await getToken({ req } as { req: any })
 
-	console.log('index page session: ', JSON.stringify(token))
+	// console.log('index page session: ', JSON.stringify(token))
 
 	if (!token)
 		return {

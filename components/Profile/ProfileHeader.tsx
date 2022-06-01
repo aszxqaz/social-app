@@ -7,7 +7,7 @@ import {
 	rightHeaderTools,
 } from '../../content/profile/headerTools'
 import { FlexCenter } from '../../ui'
-import { IconsToolPanel } from '../Common'
+import { IconsToolPanel } from '../icons-tool-panel'
 import Categories from './Categories'
 import { getLastSeen } from './utils/lastSeen'
 
@@ -21,7 +21,6 @@ const RIGHT_ICONS_START = 0
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ lastSeen, username, image }) => {
 	let imgBoxSize
-	// console.log(JSON.stringify(global.window))
 	if (process.browser) {
 		imgBoxSize = Math.min(
 			document.documentElement.clientWidth,

@@ -5,7 +5,6 @@ export interface ProfileProps {
 }
 
 const Profile: React.FC<ProfileProps> = ({profileHeaderProps}) => {
-  console.log(`Profile props: ${JSON.stringify(profileHeaderProps)}`)
 	return (
 		<>
 			<ProfileHeader {...profileHeaderProps} />

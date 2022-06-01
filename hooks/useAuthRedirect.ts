@@ -2,18 +2,10 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-interface RedirectOptions {
-	whenNotAuthenticated: string | null
-	whenAuthenticated: string | null
-}
-
-const defaultOptions: RedirectOptions = {
-	whenNotAuthenticated: '/login',
-	whenAuthenticated: '/',
-}
-
-export const useAuthRedirect = (options: RedirectOptions = defaultOptions) => {
-	const { whenAuthenticated, whenNotAuthenticated } = options
+export const useAuthRedirect = (
+	whenNotAuthenticated: string | null,
+	whenAuthenticated?: string | null,
+) => {
 	const { status } = useSession()
 	const router = useRouter()
 
@@ -26,7 +18,5 @@ export const useAuthRedirect = (options: RedirectOptions = defaultOptions) => {
 		}
 	}, [status])
 
-	return {
-		status,
-	}
+  return { status }
 }
