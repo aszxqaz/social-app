@@ -1,4 +1,4 @@
-import { Box, Center, Container, Heading } from '@chakra-ui/react'
+import { Box, Flex, Heading } from '@chakra-ui/react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import Image from 'next/image'
@@ -6,14 +6,13 @@ import React from 'react'
 import { LoginForm } from '../components/Login/LoginForm'
 import { useLoginHandler } from '../handlers/useLoginHandler'
 import { useAuthRedirect } from '../hooks/useAuthRedirect'
-import { FlexCenter } from '../ui'
 
 const Login: React.FC = () => {
 	const { error, onSubmit } = useLoginHandler()
 	useAuthRedirect(null, '/login')
 
 	return (
-		<FlexCenter flexDir="column" mx="auto" width="80%">
+		<Flex flexDir="column" mx="auto" width="80%">
 			<Box>
 				<Image src="/logo/rocket.png" width={546} height={311} alt="Rocket application logo" />
 			</Box>
@@ -28,7 +27,7 @@ const Login: React.FC = () => {
 			</Heading>
 			<LoginForm onSubmit={onSubmit} />
 			{error}
-		</FlexCenter>
+		</Flex>
 	)
 }
 

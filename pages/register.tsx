@@ -1,4 +1,4 @@
-import { Box, Center, Container, Heading } from '@chakra-ui/react'
+import { Box, Flex, Heading } from '@chakra-ui/react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import Image from 'next/image'
@@ -6,13 +6,12 @@ import React from 'react'
 import { RegisterForm, Success } from '../components/Register'
 import { useRegisterHandler } from '../handlers/useRegisterHandler'
 import { useAuthRedirect } from '../hooks/useAuthRedirect'
-import { FlexCenter } from '../ui'
 
 const Register: React.FC = ({}) => {
 	const { signUpStatus, onSubmit } = useRegisterHandler()
 	useAuthRedirect(null, '/')
 	return (
-		<FlexCenter flexDir="column" mx="auto" width="80%">
+		<Flex flexDir="column" mx="auto" width="80%" mb="100px">
 			<Box>
 				<Image src="/logo/rocket.png" width={546} height={311} alt="Rocket application logo"/>
 			</Box>
@@ -26,7 +25,7 @@ const Register: React.FC = ({}) => {
 				REGISTER
 			</Heading>
 			{signUpStatus === 'success' ? <Success /> : <RegisterForm onSubmit={onSubmit} />}
-		</FlexCenter>
+		</Flex>
 	)
 }
 

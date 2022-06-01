@@ -25,7 +25,7 @@ import defaultTheme from '../theme'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 	return (
-		<ChakraProvider resetCSS theme={defaultTheme}>
+		<ChakraProvider>
 			<ColorModeScript  />
 			<SessionProvider session={session}>
 				<Component {...pageProps} />
