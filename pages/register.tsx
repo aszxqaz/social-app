@@ -14,7 +14,7 @@ const Register: React.FC = ({}) => {
 	return (
 		<FlexCenter flexDir="column" mx="auto" width="80%">
 			<Box>
-				<Image src="/logo/rocket.png" width={546} height={311} />
+				<Image src="/logo/rocket.png" width={546} height={311} alt="Rocket application logo"/>
 			</Box>
 			<Heading
 				letterSpacing={2}

@@ -38,7 +38,7 @@ export const IconsToolPanel = ({ tools, iconProps, ...flexProps }: IconsToolPane
 					)
 				}
 
-				return <ToolIcon />
+				return <ToolIcon key={item.key} />
 			})}
 		</FlexCenter>
 	)
