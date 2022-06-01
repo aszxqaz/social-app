@@ -21,7 +21,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ image, fullname, online }) =>
 	return (
 		<Flex p={3}>
 			<Flex rounded="full" overflow="hidden" border="1px" borderColor="white">
-				<Image src={image} width="60px" height="60px" objectFit="cover" />
+				<Image src={image} width="60px" height="60px" objectFit="cover" alt="" />
 			</Flex>
 			<Flex alignItems="center" justifyContent="left" flexGrow={1} pl={5}>
 				<Text>{fullname}</Text>

@@ -14,10 +14,11 @@ const Categories: React.FC<CategoriesProps> = ({ categories }) => {
 	return (
 		<Grid gridTemplateColumns="auto auto" gap={4} p={3}>
 			{categories.map((category, i) => {
+        const {key, ...rest} = category
         // const bg = {
         //   bgColor: tileColors.splice(Math.round(Math.random() * (tileColors.length - 1)), 1)[0]
         // }
-				return <TileCategory {...category} />
+				return <TileCategory key={key} {...rest} />
 			})}
 		</Grid>
 	)
