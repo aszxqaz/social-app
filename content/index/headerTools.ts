@@ -1,27 +1,23 @@
 import { IconType } from 'react-icons'
 import { RiEditLine, RiMore2Fill, RiRefreshLine, RiSearchLine } from 'react-icons/ri'
+import { WithKey, withKey } from '../utils/withKey'
 
 interface HeaderToolsItem {
 	icon: IconType
-	key: number
 }
 
-export const headerToolsContent: HeaderToolsItem[] = [
+export const headerToolsContent: WithKey<HeaderToolsItem>[] = withKey([
 	{
 		icon: RiRefreshLine,
-		key: Math.random()
 	},
 	{
 		icon: RiSearchLine,
-		key: Math.random()
 	},
 
 	{
 		icon: RiEditLine,
-		key: Math.random()
 	},
 	{
 		icon: RiMore2Fill,
-		key: Math.random()
 	},
-]
+])

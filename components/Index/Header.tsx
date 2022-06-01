@@ -1,8 +1,8 @@
 import { Box, Flex, FlexProps, Heading, Link, LinkProps, TypographyProps } from '@chakra-ui/react'
 import React from 'react'
 import { RiPlayCircleLine } from 'react-icons/ri'
-import { headerMenuContent } from '../content/headerMenu'
-import { headerToolsContent } from '../content/headerTools'
+import { headerMenuContent } from '../../content/index/headerMenu'
+import { headerToolsContent } from '../../content/index/headerTools'
 
 interface HeaderProps {
 	children?: React.ReactNode

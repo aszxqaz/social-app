@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { getToken } from 'next-auth/jwt'
-import Header from '../components/Header'
-import ProfileInfo, { ProfileInfoProps } from '../components/ProfileInfo'
+import Header from '../components/Index/Header'
+import ProfileInfo, { ProfileInfoProps } from '../components/Index/ProfileInfo'
 import { useAuthRedirect } from '../hooks/useAuthRedirect'
 
 interface HomePageProps {
