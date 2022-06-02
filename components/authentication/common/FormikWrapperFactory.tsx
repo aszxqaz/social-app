@@ -23,7 +23,7 @@ export function FormikWrapperFactory<T>({
 	onSubmit,
 	validations,
 }: FormikWrapperFactoryProps<T>): React.FC<AuthenticationFormProps<T>> {
-	return ({ textContent, inputProps, ...flexProps }) => {
+	return function FormikWrapper({ textContent, inputProps, ...flexProps }) {
 		const validationSchema = validations ? Yup.object().shape(validations) : undefined
 		const Input = InputFactory<T>()
 		return (

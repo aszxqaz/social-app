@@ -10,7 +10,7 @@ export type InputProps<T> = {
 } & ChakraInputProps
 
 export function InputFactory<T>() {
-	return ({ name, label, placeholder, ...restProps }: InputProps<T>) => {
+	return function Input ({ name, label, placeholder, ...restProps }: InputProps<T>) {
 		const [field, meta] = useField(name)
 		const isInvalid = Boolean(meta.touched && meta.error)
 		return (
