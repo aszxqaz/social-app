@@ -1,4 +1,4 @@
-import { withKey, WithKey } from "../utils/withKey"
+import { withKey, WithKey } from "../../components/authentication/content/withKey"
 
 export interface Category {
   title: string

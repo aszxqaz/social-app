@@ -1,4 +1,4 @@
-import { WithKey } from '../../content/utils/withKey'
+import { WithKey } from '../authentication/content/withKey'
 import { FlexCenter } from '../../ui'
 import { IconToolsItem } from '../../content/types'
 import { IconBaseProps } from 'react-icons'

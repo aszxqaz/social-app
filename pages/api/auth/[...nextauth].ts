@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials'
 import { userService } from '../../../typeorm'
 import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter'
 import { Redis } from '@upstash/redis'
+import { LOGIN_ROUTE } from '../../../routes'
 
 // const redis = new Redis({
 // 	url: 'https://eu2-moved-mutt-30230.upstash.io',
@@ -68,8 +69,8 @@ export default NextAuth({
 	},
 	jwt: {},
 	pages: {
-		signIn: '/login',
-		error: '/login',
+		signIn: LOGIN_ROUTE,
+		error: LOGIN_ROUTE,
 	},
 })
 

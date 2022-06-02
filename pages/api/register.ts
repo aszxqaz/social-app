@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { SignUpData } from '../../components/Register'
+import { SignUpData } from '../../components/authentication/content'
 import { userService } from '../../typeorm'
 
 export interface RegistrationError {

@@ -4,21 +4,22 @@ import { DarkModeSwitch } from '../chakra/DarkModeSwitch'
 import Header from '../components/Index/Header'
 import ProfileInfo, { ProfileInfoProps } from '../components/Index/ProfileInfo'
 import { useAuthRedirect } from '../hooks/useAuthRedirect'
+import { LOGIN_ROUTE } from '../routes'
 
 interface HomePageProps {
 	profilePageProps: ProfileInfoProps
 }
 
 const Home: NextPage<HomePageProps> = ({ profilePageProps }) => {
-	const { status } = useAuthRedirect('/login')
-  console.log(status)
+	const { status } = useAuthRedirect(LOGIN_ROUTE)
+	console.log(status)
 
 	if (status === 'authenticated')
 		return (
 			<>
 				<Header />
 				<ProfileInfo {...profilePageProps} />
-        {/* <DarkModeSwitch /> */}
+				{/* <DarkModeSwitch /> */}
 			</>
 		)
 	return null

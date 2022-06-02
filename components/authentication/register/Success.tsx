@@ -1,7 +1,8 @@
 import { Center, Flex, Heading, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import React from 'react'
 
-export const Success = (): React.ReactElement => {
+const Success: React.FC = () => {
 	return (
 		<Center>
 			<Flex
@@ -28,3 +29,5 @@ export const Success = (): React.ReactElement => {
 		</Center>
 	)
 }
+
+export default Success

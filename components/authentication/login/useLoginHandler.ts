@@ -1,7 +1,7 @@
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
-import { SubmitHandler } from '../components/form'
-import { SignInData } from '../components/Login/initialValues'
+import { SubmitHandler } from '../../form'
+import { SignInData } from '../content'
 
 export function useLoginHandler() {
 	const [error, setError] = useState<string | null>(null)

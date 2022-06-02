@@ -1,12 +1,10 @@
-import { useMemo, useState } from 'react'
-import { axios } from '../axios'
-import { SubmitHandler } from '../components/form'
-import { SignUpData } from '../components/Register'
-
-type SignUpStatus = null | 'submitting' | 'success'
+import { useState } from 'react'
+import { axios } from '../../../axios'
+import { SubmitHandler } from '../../form'
+import { SignUpData } from '../common'
 
 export function useRegisterHandler() {
-	const [signUpStatus, setSignUpStatus] = useState<SignUpStatus>(null)
+	const [signUpStatus, setSignUpStatus] = useState<null | 'submitting' | 'success'>(null)
 
 	const submitHandler: SubmitHandler<SignUpData> = async (data) => {
 		setSignUpStatus('submitting')

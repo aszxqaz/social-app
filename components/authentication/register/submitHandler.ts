@@ -1,5 +1,5 @@
 import { FormikHelpers } from 'formik'
-import { SignUpData } from './initialValues'
+import { SignUpData } from '../common'
 
 export type RegisterSubmitHandler = ((
 	values: SignUpData,

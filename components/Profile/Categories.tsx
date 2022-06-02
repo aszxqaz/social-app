@@ -1,7 +1,7 @@
 import { Grid } from '@chakra-ui/react'
 import React from 'react'
 import { Category } from '../../content/profile/categories'
-import { WithKey } from '../../content/utils/withKey'
+import { WithKey } from '../authentication/content/withKey'
 import { TILE_COLORS } from '../../ui/tileColors'
 import TileCategory from './TileCategory'
 

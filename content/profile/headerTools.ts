@@ -7,7 +7,7 @@ import {
 	RiImage2Line,
 } from 'react-icons/ri'
 import { GrGallery } from './GalleryIcon'
-import { WithKey, withKey } from '../utils/withKey'
+import { WithKey, withKey } from '../../components/authentication/content/withKey'
 import { IconToolsItem } from '../types'
 
 type HeaderToolsItem = IconToolsItem

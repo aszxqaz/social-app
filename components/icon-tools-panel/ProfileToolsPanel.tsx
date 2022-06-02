@@ -3,7 +3,7 @@ import React from 'react'
 import { IconBaseProps } from 'react-icons'
 import { IconToolsPanel, IconToolsPanelProps } from '.'
 import { IconToolsItem } from '../../content/types'
-import { WithKey } from '../../content/utils/withKey'
+import { WithKey } from '../authentication/content/withKey'
 
 interface ProfileToolsPanelProps extends IconToolsPanelProps {}
 

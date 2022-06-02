@@ -1,0 +1,1 @@
+export const APP_LOGO_LARGE = '/logo/rocket.png'

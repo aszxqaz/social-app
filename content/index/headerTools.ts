@@ -1,6 +1,6 @@
 import { IconType } from 'react-icons'
 import { RiEditLine, RiMore2Fill, RiRefreshLine, RiSearchLine, RiTeamLine } from 'react-icons/ri'
-import { WithKey, withKey } from '../utils/withKey'
+import { WithKey, withKey } from '../../components/authentication/content/withKey'
 
 interface HeaderToolsItem {
 	icon: IconType
