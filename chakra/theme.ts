@@ -1,5 +1,6 @@
-import { extendTheme } from '@chakra-ui/react'
+import { ChakraTheme, extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
+import { Text } from './componentStyleConfig'
 
 const breakpoints = createBreakpoints({
 	sm: '40em',
@@ -8,9 +9,23 @@ const breakpoints = createBreakpoints({
 	xl: '80em',
 })
 
-const theme = extendTheme({
-	initialColorMode: 'dark',
-	useSystemColorMode: false,
+const theme = {
+	config: {
+		initialColorMode: 'dark',
+		useSystemColorMode: false,
+	},
+	styles: {
+		global: {
+			// '*': {
+			// 	fontFamily: 'Nunito',
+			// 	fontSize: '1.2rem',
+			// },
+      // form: {
+      //   fontFamily: 'Nunito',
+			// 	fontSize: '1.2rem',
+      // }
+		},
+	},
 	semanticTokens: {
 		colors: {
 			text: {
@@ -33,8 +48,8 @@ const theme = extendTheme({
 	colors: {
 		black: '#16161D',
 	},
-	fonts: { mono: `'Menlo', monospace` },
+	fonts: { sansSerif: `'Nunito', sans-serif` },
 	breakpoints,
-})
+}
 
-export default theme
+export default extendTheme(theme)

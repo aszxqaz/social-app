@@ -29,16 +29,14 @@ const Header: React.FC<HeaderProps> = ({}) => {
 						alt="Rocket application logo"
 					/>
         </Box>
-				<Box flexGrow={1}>
-					
-				</Box>
+
 				{/* <Flex gap={4}>
 					{headerToolsContent.map((item) => {
 						const Icon = item.icon
 						return <Icon key={item.icon.name} fontSize="1.5rem" />
 					})}
 				</Flex> */}
-        <IconToolsPanel tools={headerToolsContent} gap={6} iconProps={{opacity: 0.8}} />
+        <IconToolsPanel ml="auto" pt={3} tools={headerToolsContent} gap={6} iconProps={{opacity: 0.8}} />
 			</Flex>
 			<Flex>
 				{headerMenuContent.map((item, i) => {

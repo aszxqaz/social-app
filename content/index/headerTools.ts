@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons'
-import { RiEditLine, RiMore2Fill, RiRefreshLine, RiSearchLine } from 'react-icons/ri'
+import { RiEditLine, RiMore2Fill, RiRefreshLine, RiSearchLine, RiTeamLine } from 'react-icons/ri'
 import { WithKey, withKey } from '../utils/withKey'
 
 interface HeaderToolsItem {
@@ -8,7 +8,7 @@ interface HeaderToolsItem {
 
 export const headerToolsContent: WithKey<HeaderToolsItem>[] = withKey([
 	{
-		icon: RiRefreshLine,
+		icon: RiTeamLine,
 	},
 	{
 		icon: RiSearchLine,
