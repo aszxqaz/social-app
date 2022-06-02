@@ -5,12 +5,13 @@ import { IconBaseProps } from 'react-icons'
 import { FlexProps, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
-type IconsToolPanelProps = {
+export type IconToolsPanelProps = {
 	tools: WithKey<IconToolsItem>[]
 	iconProps?: IconBaseProps
+  toolBtnProps?: FlexProps
 } & FlexProps
 
-export const IconsToolPanel = ({ tools, iconProps, ...flexProps }: IconsToolPanelProps) => {
+export const IconToolsPanel = ({ tools, iconProps, toolBtnProps, ...flexProps }: IconToolsPanelProps) => {
 	return (
 		<FlexCenter {...flexProps}>
 			{tools.map((item) => {
@@ -18,10 +19,9 @@ export const IconsToolPanel = ({ tools, iconProps, ...flexProps }: IconsToolPane
 				const fontSize = (item?.scale || 1) * 2.2
 
 				const ToolIcon = () => (
-					<FlexCenter w="3rem" h="3rem" backgroundColor="rgba(0,0,0,0.3)" rounded="md">
+					<FlexCenter w="3rem" h="3rem" {...toolBtnProps}>
 						<Icon
 							key={item.key}
-							color="rgba(255,255,255,0.9)"
 							fontSize={`${fontSize}rem`}
 							{...iconProps}
 						/>

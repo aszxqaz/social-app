@@ -28,7 +28,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 						<Text textAlign="center">
 							Not registered yet?{' '}
 							<NextLink href="/register">
-								<Link textColor="green.400">Sign Up</Link>
+								<Link colorScheme="green">Sign Up</Link>
 							</NextLink>
 						</Text>
 					</Box>

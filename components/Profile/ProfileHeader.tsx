@@ -1,13 +1,8 @@
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import { CATEGORIES } from '../../content/profile/categories'
-import {
-	bottomHeaderTools,
-	leftHeaderTools,
-	rightHeaderTools,
-} from '../../content/profile/headerTools'
-import { FlexCenter } from '../../ui'
-import { IconsToolPanel } from '../icons-tool-panel'
+import { bottomHeaderTools, leftHeaderTools, rightHeaderTools } from '../../content/profile/headerTools'
+import ProfileToolsPanel from '../icon-tools-panel/ProfileToolsPanel'
 import Categories from './Categories'
 import { getLastSeen } from './utils/lastSeen'
 
@@ -22,21 +17,13 @@ const RIGHT_ICONS_START = 0
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ lastSeen, username, image }) => {
 	let imgBoxSize
 	if (process.browser) {
-		imgBoxSize = Math.min(
-			document.documentElement.clientWidth,
-			document.documentElement.clientHeight,
-		)
+		imgBoxSize = Math.min(document.documentElement.clientWidth, document.documentElement.clientHeight)
 	}
 	return (
 		<>
 			<Flex position="fixed" zIndex={20} top={0} left={0} right={0} p={3}>
-				<IconsToolPanel
-					justifyContent="left"
-					flexGrow={1}
-					gap={3}
-					tools={leftHeaderTools}
-				/>
-				<IconsToolPanel gap={3} tools={rightHeaderTools} />
+				<ProfileToolsPanel justifyContent="left" flexGrow={1} gap={3} tools={leftHeaderTools} />
+				<ProfileToolsPanel gap={3} tools={rightHeaderTools} />
 			</Flex>
 			<Box overflow="hidden" width="100%" height={imgBoxSize} position="relative">
 				<Image opacity={0.9} src="/me.jpeg" width="full" height="full" objectFit="cover" alt="" />
@@ -52,7 +39,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ lastSeen, username, image
 						<Heading size="md">{username}</Heading>
 						<Text>Last seen {getLastSeen(lastSeen)}</Text>
 					</Box>
-					<IconsToolPanel pr={2} gap={4} tools={bottomHeaderTools} />
+					<ProfileToolsPanel pr={2} gap={4} tools={bottomHeaderTools} />
 				</Flex>
 			</Box>
 

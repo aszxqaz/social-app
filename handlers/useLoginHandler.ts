@@ -9,7 +9,7 @@ export function useLoginHandler() {
 	const submitHandler: SubmitHandler<SignInData> = async (data) => {
 		try {
 			const res = await signIn<'credentials'>('credentials', {
-				username: data.email,
+				email: data.email,
 				password: data.password,
 				redirect: false,
 				callbackUrl: process.env.NEXTAUTH_URL,

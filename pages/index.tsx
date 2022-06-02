@@ -1,5 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { getToken } from 'next-auth/jwt'
+import { DarkModeSwitch } from '../chakra/DarkModeSwitch'
 import Header from '../components/Index/Header'
 import ProfileInfo, { ProfileInfoProps } from '../components/Index/ProfileInfo'
 import { useAuthRedirect } from '../hooks/useAuthRedirect'
@@ -17,6 +18,7 @@ const Home: NextPage<HomePageProps> = ({ profilePageProps }) => {
 			<>
 				<Header />
 				<ProfileInfo {...profilePageProps} />
+        {/* <DarkModeSwitch /> */}
 			</>
 		)
 	return null

@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 				textTransform="uppercase"
 				textAlign="center"
 				textColor="#9ae6b4"
-        mb={2}
+				mb={2}
 				size="lg">
 				LOGIN
 			</Heading>

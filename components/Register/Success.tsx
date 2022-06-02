@@ -18,7 +18,7 @@ export const Success = (): React.ReactElement => {
 				<Text size="xl" p={6}>
 					You have successfully signed up! Go to{' '}
 					<NextLink href="/login">
-						<Link as="a" display="inline" textColor="green.300">
+						<Link as="a" display="inline" colorScheme="green">
 							login page
 						</Link>
 					</NextLink>

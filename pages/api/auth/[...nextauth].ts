@@ -21,7 +21,9 @@ export default NextAuth({
 			async authorize(credentials, req) {
 				if (!credentials) return null
 				const { email, password } = credentials
+        console.log(email)
 				const user = await userService.findUser([{ email }])
+        console.log(user)
 				if (!user) return null
 				if (user.password === credentials.password)
 					return {

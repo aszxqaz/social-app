@@ -29,7 +29,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, ...flexPro
 						<Text textAlign="center">
 							Have an account?{' '}
 							<NextLink href="/login">
-								<Link textColor="green.400">Sign In</Link>
+								<Link colorScheme="green">Sign In</Link>
 							</NextLink>
 						</Text>
 					</Box>

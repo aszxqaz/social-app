@@ -12,11 +12,11 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ image, fullname, online }) =>
 	const switchStyle = online
 		? {
 				text: 'Online',
-				textColor: 'green',
+				colorScheme: 'green',
 		  }
 		: {
 				text: 'Offline',
-				textColor: 'red',
+				colorScheme: 'red',
 		  }
 	return (
 		<Flex p={3}>
@@ -29,7 +29,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ image, fullname, online }) =>
 			<Flex alignItems="center" justifyContent="left" pl={5}>
 				<Flex gap={3} alignItems="center" justifyContent="left"  >
 					<Switch colorScheme="green" isChecked={online} />
-					<Text textColor={switchStyle.textColor}>{switchStyle.text}</Text>
+					<Text colorScheme={switchStyle.colorScheme}>{switchStyle.text}</Text>
 				</Flex>
 			</Flex>
 		</Flex>
