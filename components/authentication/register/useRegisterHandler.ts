@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { axios } from '../../../axios'
 import { SubmitHandler } from '../../form'
-import { SignUpData } from '../common'
+import { SignUpData } from '../content'
 
 export function useRegisterHandler() {
 	const [signUpStatus, setSignUpStatus] = useState<null | 'submitting' | 'success'>(null)
