@@ -68,7 +68,7 @@ export function FormikWrapperFactory<T>(): React.FC<FormikWrapperProps<T> & { ch
 								return <Input key={key} {...rest} _onChange={_onChange} />
 							})}
 							<Box w="100%">
-								<Button isLoading={isSubmitting} mt={3} w="100%" colorScheme="green" type="submit">
+								<Button isLoading={isSubmitting} mt={3} w="100%" type="submit">
 									{textContent.submitBtnText}
 								</Button>
 							</Box>

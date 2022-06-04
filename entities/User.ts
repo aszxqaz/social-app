@@ -33,4 +33,11 @@ export class User {
 
 	@ManyToMany(() => User, (user) => user.followers)
 	following!: User[]
+
+	@ManyToMany(() => User, (user) => user.following)
+	@JoinTable()
+	incomingFriendRequests!: User[]
+
+	@ManyToMany(() => User, (user) => user.followers)
+	outcomingFriendRequests!: User[]
 }

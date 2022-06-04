@@ -1,5 +1,7 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-export const Text: ComponentStyleConfig = {
-
+export const Button: ComponentStyleConfig = {
+  defaultProps: {
+    colorScheme: 'teal'
+  }
 }

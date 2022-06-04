@@ -29,7 +29,7 @@ export const IconToolsPanel = ({ tools, iconProps, toolBtnProps, ...flexProps }:
           console.log(item.link)
 					return (
 						<NextLink {...item.link} key={item.key}>
-							<Link>
+							<Link userSelect="none">
 								<ToolIcon />
 							</Link>
 						</NextLink>

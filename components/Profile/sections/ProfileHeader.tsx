@@ -1,14 +1,14 @@
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import NextImage from 'next/image'
 import React, { useContext } from 'react'
-import { DEFAULT_AVATAR } from '../../content/images'
-import { CATEGORIES } from '../../content/profile/categories'
-import { bottomHeaderTools, leftHeaderTools, rightHeaderTools } from '../../content/profile/headerTools'
-import { ProfileContext } from '../../pages/profile/[id]'
-import { ProfileInfo } from '../../redux/features/userSlice'
-import ProfileToolsPanel from '../icon-tools-panel/ProfileToolsPanel'
+import { DEFAULT_AVATAR } from '../../../content/images'
+import { CATEGORIES } from '../../../content/profile/categories'
+import { bottomHeaderTools, leftHeaderTools, rightHeaderTools } from '../../../content/profile/headerTools'
+import { ProfileContext } from '../../../pages/profile/[id]'
+import { ProfileInfo } from '../../../redux/features/userSlice'
+import ProfileToolsPanel from '../../icon-tools-panel/ProfileToolsPanel'
 import Categories from './Categories'
-import { getLastSeen } from './utils/lastSeen'
+import { getLastSeen } from '../utils/lastSeen'
 
 // export interface ProfileHeaderProps {
 // 	image?: string
@@ -58,7 +58,7 @@ const ProfileHeader: React.FC = () => {
 				</Flex>
 			</Box>
 
-			<Categories categories={CATEGORIES} />
+		
 		</>
 	)
 }

@@ -2,6 +2,8 @@ import { DataSource, DeepPartial, FindOneOptions, FindOptionsWhere, Repository }
 import { User } from '../entities/User'
 import { getDataSourceOptions } from './getDataSourceOptions'
 
+type UserKey<K extends keyof User> = User[K]
+
 class UserService {
 	private dataSource: DataSource
 	private userRepo: Repository<User>
@@ -33,6 +35,11 @@ class UserService {
 		return await this.userRepo.findOne(options)
 	}
 
+	async sendFriendRequest(from: UserKey<'id'>, to: UserKey<'id'>) {
+    const currentFriends = await this.getFriends(from)
+    console.log(currentFriends)
+	}
+
 	async getField(id: string, field: keyof User) {
 		switch (field) {
 			case 'followers': {
@@ -53,6 +60,16 @@ class UserService {
 	async findAll() {
 		await this.init()
 		return await this.userRepo.find()
+	}
+
+	async getFriends(id: UserKey<'id'>) {
+		return await this.findOne({
+			where: { id },
+			select: {},
+			relations: {
+				followers: true,
+			},
+		})
 	}
 
 	async getInfo(id: string, fields: Array<keyof User>) {
