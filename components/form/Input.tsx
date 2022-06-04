@@ -7,16 +7,26 @@ export type InputProps<T> = {
 	name: keyof T
 	label: string
 	placeholder: string
+	_onChange?: React.ChangeEventHandler<HTMLInputElement>
 } & ChakraInputProps
 
 export function InputFactory<T>() {
-	return function Input ({ name, label, placeholder, ...restProps }: InputProps<T>) {
-		const [field, meta] = useField(name)
+	return function Input({ name, label, placeholder, _onChange, ...restProps }: InputProps<T>) {
+		const [{ onChange, ...field }, meta] = useField(name)
 		const isInvalid = Boolean(meta.touched && meta.error)
 		return (
 			<FormControl isInvalid={isInvalid}>
 				<FormLabel htmlFor={name}>{label}</FormLabel>
-				<ChakraInput type="text" id={name} {...restProps} {...field} />
+				<ChakraInput
+					type="text"
+					id={name}
+					{...restProps}
+					onChange={(e) => {
+						onChange(e)
+						_onChange?.(e)
+					}}
+					{...field}
+				/>
 				<Paragraph minH="1.5rem" colorScheme="red">
 					{meta.error}
 				</Paragraph>

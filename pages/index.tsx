@@ -1,24 +1,33 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { getToken } from 'next-auth/jwt'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { DarkModeSwitch } from '../chakra/DarkModeSwitch'
 import Header from '../components/Index/Header'
-import ProfileInfo, { ProfileInfoProps } from '../components/Index/ProfileInfo'
+import ProfileInfo from '../components/Index/ProfileInfo'
+import UsersList from '../components/UsersList/UsersList'
 import { useAuthRedirect } from '../hooks/useAuthRedirect'
 import { LOGIN_ROUTE } from '../routes'
+import { ProfileInfo as ProfileInfoProps } from '../redux/features/userSlice'
 
 interface HomePageProps {
 	profilePageProps: ProfileInfoProps
 }
 
 const Home: NextPage<HomePageProps> = ({ profilePageProps }) => {
+	const router = useRouter()
+
 	const { status } = useAuthRedirect(LOGIN_ROUTE)
 	console.log(status)
+
+	useEffect(() => {}, [router.asPath])
 
 	if (status === 'authenticated')
 		return (
 			<>
 				<Header />
-				<ProfileInfo {...profilePageProps} />
+				{router.asPath === '/users' ? <UsersList /> : <ProfileInfo {...profilePageProps} online={false} />}
+
 				{/* <DarkModeSwitch /> */}
 			</>
 		)
@@ -41,8 +50,8 @@ export const getServerSideProps: GetServerSideProps = async ({
 		props: {
 			profilePageProps: {
 				fullname: token?.name!,
-				image: '/me.jpg' || token?.picture,
-				online: true,
+				avatar: token?.picture,
+				online: false,
 			},
 		},
 	}

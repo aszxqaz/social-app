@@ -1,12 +1,15 @@
 import { signIn } from 'next-auth/react'
-import { useState } from 'react'
+import { EventHandler, useCallback, useRef, useState } from 'react'
 import { SubmitHandler } from '../../form'
 import { SignInData } from '../content'
 
-export function useLoginHandler() {
-	const [error, setError] = useState<string | null>(null)
+export function useLoginHandler({ handleError }: { handleError: any}) {
 
-	const submitHandler: SubmitHandler<SignInData> = async (data) => {
+	const onChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(() => {
+    handleError('')
+	}, [])
+
+	const submitHandler: SubmitHandler<SignInData> = useCallback(async (data) => {
 		try {
 			const res = await signIn<'credentials'>('credentials', {
 				email: data.email,
@@ -15,17 +18,17 @@ export function useLoginHandler() {
 				callbackUrl: process.env.NEXTAUTH_URL,
 			})
 			if (!res) {
-				setError('Oops, something wrong at the server')
+        handleError('Oops, something wrong on the server')
 			} else if (res.status === 401) {
-				setError('Credentials provided are wrong')
+        handleError('Wrong email or password')
 			}
 		} catch (e: any) {
 			console.log(e)
 		}
-	}
+	}, [handleError])
 
 	return {
 		onSubmit: submitHandler,
-		error,
+		onChange,
 	}
 }

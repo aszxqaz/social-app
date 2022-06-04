@@ -1,19 +1,24 @@
+import { AxiosError } from 'axios'
 import { useState } from 'react'
 import { axios } from '../../../axios'
 import { SubmitHandler } from '../../form'
 import { SignUpData } from '../content'
 
-export function useRegisterHandler() {
-	const [signUpStatus, setSignUpStatus] = useState<null | 'submitting' | 'success'>(null)
+type Data = {
+	error: string
+}
+
+export function useRegisterHandler({ handleError }: { handleError: any }) {
+	const [signUpStatus, setSignUpStatus] = useState<boolean>(false)
 
 	const submitHandler: SubmitHandler<SignUpData> = async (data) => {
-		setSignUpStatus('submitting')
-
 		try {
 			const res = await axios.post('/api/register', data)
-			setSignUpStatus('success')
+			setSignUpStatus(true)
 		} catch (e: any) {
-			setSignUpStatus(null)
+			if (e instanceof AxiosError) {
+				handleError(e.response?.data.error)
+			}
 		}
 	}
 

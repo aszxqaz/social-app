@@ -1,13 +1,9 @@
-import ProfileHeader, { ProfileHeaderProps } from './ProfileHeader'
+import ProfileHeader from './ProfileHeader'
 
-export interface ProfileProps {
-	profileHeaderProps: ProfileHeaderProps
-}
-
-const Profile: React.FC<ProfileProps> = ({profileHeaderProps}) => {
+const Profile: React.FC = () => {
 	return (
 		<>
-			<ProfileHeader {...profileHeaderProps} />
+			<ProfileHeader />
 		</>
 	)
 }

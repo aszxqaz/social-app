@@ -9,16 +9,12 @@ export interface RegistrationError {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const { email, firstName, lastName, password } = req.body
-	const errors: RegistrationError[] = []
 
 	const emailInUse = await userService.findUser({ email })
-	if (emailInUse) errors.push({ name: 'email', message: 'Email is already in use.' })
-
-	if (errors.length)
+  
+	if (emailInUse)
 		return res.status(400).json({
-			statusCode: 400,
-			ok: false,
-			errors,
+			error: 'Email is already in use',
 		})
 
 	await userService.createUser({

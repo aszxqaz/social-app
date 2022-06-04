@@ -15,14 +15,14 @@ const AuthenticationPage: React.FC<AuthenticationPageProps> = ({ variant }) => {
 
 	return (
 		<Wrapper gap={2} maxW="20rem">
-			<Authentication variant={variant} />
+			<Authentication key={'authentication'} variant={variant} />
 		</Wrapper>
 	)
 }
 
 export const getServerSideProps: GetServerSideProps<AuthenticationPageProps> = async ({ req, query }) => {
 	const session = await getSession({ req })
-	// console.log('login page session: ', JSON.stringify(session))
+	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF page session: ', JSON.stringify(session))
 	let variant
 	if (query['variant'] === 'login' || query['variant'] === 'register')
 		variant = query['variant'] as 'login' | 'register'

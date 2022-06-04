@@ -8,10 +8,11 @@ import NextLink from 'next/link'
 export type IconToolsPanelProps = {
 	tools: WithKey<IconToolsItem>[]
 	iconProps?: IconBaseProps
-  toolBtnProps?: FlexProps
+	toolBtnProps?: FlexProps
 } & FlexProps
 
 export const IconToolsPanel = ({ tools, iconProps, toolBtnProps, ...flexProps }: IconToolsPanelProps) => {
+  console.log(tools)
 	return (
 		<FlexCenter {...flexProps}>
 			{tools.map((item) => {
@@ -19,18 +20,15 @@ export const IconToolsPanel = ({ tools, iconProps, toolBtnProps, ...flexProps }:
 				const fontSize = (item?.scale || 1) * 2.2
 
 				const ToolIcon = () => (
-					<FlexCenter w="3rem" h="3rem" {...toolBtnProps}>
-						<Icon
-							key={item.key}
-							fontSize={`${fontSize}rem`}
-							{...iconProps}
-						/>
+					<FlexCenter w="3rem" h="3rem" cursor="pointer" {...toolBtnProps}>
+						<Icon key={item.key} fontSize={`${fontSize}rem`} {...iconProps} />
 					</FlexCenter>
 				)
 
 				if (item?.link) {
+          console.log(item.link)
 					return (
-						<NextLink href={item.link}>
+						<NextLink {...item.link} key={item.key}>
 							<Link>
 								<ToolIcon />
 							</Link>

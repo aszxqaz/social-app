@@ -13,6 +13,12 @@ export interface SignUpData {
 	confirmPassword: string
 }
 
+export type SingleInitialValues<A extends AuthenticationVariant, U> = {
+	[key in A]: {
+		[K in keyof U]: U[K]
+	}
+}
+
 export type InitialValues<A extends AuthenticationVariant, U, B extends AuthenticationVariant, T> = {
 	[key in A]: {
 		[K in keyof U]: U[K]

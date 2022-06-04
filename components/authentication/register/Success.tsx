@@ -1,6 +1,7 @@
 import { Center, Flex, Heading, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import React from 'react'
+import { LOGIN_ROUTE } from '../../../routes'
 
 const Success: React.FC = () => {
 	return (
@@ -18,7 +19,7 @@ const Success: React.FC = () => {
 				<Heading size="xl">Congratulations!</Heading>
 				<Text size="xl" p={6}>
 					You have successfully signed up! Go to{' '}
-					<NextLink href="/login">
+					<NextLink href={LOGIN_ROUTE}>
 						<Link as="a" display="inline" colorScheme="green">
 							login page
 						</Link>
