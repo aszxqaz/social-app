@@ -4,18 +4,10 @@ import React from 'react'
 import { DEFAULT_AVATAR } from '../../content/images'
 import { NextLink } from '../../easy-imports'
 import { PROFILE_ROUTE } from '../../routes'
-import { ProfileInfo as ProfileInfoProps } from '../../redux/features/userSlice'
+import { Item, UsersList } from '../UsersList/UsersList'
+import OnlineCircle from './OnlineCircle'
 
-const ProfileInfo: React.FC<ProfileInfoProps & { online: boolean }> = ({ avatar, firstName, lastName, online, id }) => {
-	const circleStyle = online
-		? {
-				bg: 'linear-gradient(135deg, rgba(164,179,87,1) 0%, rgba(117,137,12,1) 100%);',
-				boxShadow: '1px 1px 5px 0px rgba(0,0,0,0.75);',
-		  }
-		: {
-				bg: 'linear-gradient(135deg, rgba(99,95,88,1) 0%, rgba(64,64,64,1) 100%);',
-				boxShadow: '1px 1px 5px 0px rgba(0,0,0,0.75);',
-		  }
+const ProfileInfo: React.FC<Item<UsersList>> = ({ avatar, firstName, lastName, online, id }) => {
 	return (
 		<NextLink href={`${PROFILE_ROUTE}/${id}`}>
 			<a>
@@ -29,7 +21,7 @@ const ProfileInfo: React.FC<ProfileInfoProps & { online: boolean }> = ({ avatar,
 					<Flex alignItems="center" justifyContent="left" pl={5}>
 						<Flex gap={1} alignItems="center" justifyContent="left">
 							{/* <Switch colorScheme="green" isChecked={online} /> */}
-							<Circle size="0.75rem" shadow="md" {...circleStyle} />
+							<OnlineCircle online={!!online} />
 							{/* <Text colorScheme={switchStyle.colorScheme}>{switchStyle.text}</Text> */}
 						</Flex>
 					</Flex>

@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  firstName String    @db.VarChar(20)
+  lastName  String    @db.VarChar(20)
+  password  String
+  albums    String[]
+  avatar    String?
+  lastSeen  DateTime? @db.Timestamptz()
+  online    Boolean?
+
+  // friendedOn User[] @relation("UserFriends", references: [id])
+  // friendedBy User[] @relation("UserFriends", references: [id])
+
+  followedBy Follows[] @relation("following")
+  following  Follows[] @relation("follower")
+
+  followRequestsIn  FollowRequests[] @relation("followRequestOut")
+  followRequestsOut FollowRequests[] @relation("followRequestIn")
+}
+
+model Photo {
+  id  String @id @default(uuid())
+  url String
+}
+
+model Follows {
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User   @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
+}
+
+model FollowRequests {
+  followRequestIn  User   @relation("followRequestOut", fields: [senderId], references: [id])
+  senderId         String
+  followRequestOut User   @relation("followRequestIn", fields: [receiverId], references: [id])
+  receiverId       String
+
+  @@id([senderId, receiverId])
+}

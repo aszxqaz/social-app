@@ -4,21 +4,24 @@ import { Profile } from '../../components/Profile'
 import { mockLastSeen } from '../../components/Profile/utils/lastSeen'
 import { getSession } from 'next-auth/react'
 import { getToken, GetTokenParams } from 'next-auth/jwt'
-import { userService } from '../../typeorm'
+import { userService } from '../../prisma/user/userService'
 import { REDIRECT_TO_LOGIN, REDIRECT_TO_MAIN } from '../../reponses'
-import { REQUIRED_USER_INFO } from '../../components/Profile/required_info'
-import { ProfileInfo } from '../../redux/features/userSlice'
+import ProfileInfo from '../../components/Index/ProfileInfo'
+import { FollowRequests, Follows, User } from '@prisma/client'
 
-interface ProfilePageProps {
-	profileInfo: ProfileInfo
+export type ProfileWithFriends = Exclude<Awaited<ReturnType<typeof userService['getUserProfileWithFriends']>>, null>
+
+export type ProfilePageProps = ProfileWithFriends & {
+	me: {
+		id: string
+	}
 }
 
-export const ProfileContext = createContext<ProfileInfo>({} as ProfileInfo)
+export const ProfileContext = createContext<ProfilePageProps>({} as ProfilePageProps)
 
-const ProfilePage: NextPage<ProfilePageProps> = ({ profileInfo }) => {
-	console.log(profileInfo)
+const ProfilePage: NextPage<ProfilePageProps> = (props) => {
 	return (
-		<ProfileContext.Provider value={profileInfo}>
+		<ProfileContext.Provider value={props}>
 			<Profile />
 		</ProfileContext.Provider>
 	)
@@ -29,17 +32,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
 	const session = await getSession({ req })
 	const token = await getToken({ req } as GetTokenParams)
 
-	console.log(`token : `, token?.sub)
-
-	if (!session) return REDIRECT_TO_LOGIN
-
+	if (!session || !token || !token.sub) return REDIRECT_TO_LOGIN
 	if (typeof id !== 'string') return REDIRECT_TO_MAIN
 
-	const profileInfo = await userService.getInfo(id, REQUIRED_USER_INFO)
-  console.log(profileInfo)
+	const profileWithFriends = await userService.getUserProfileWithFriends(id) // profile of the user whose id in the query
+
+	if (profileWithFriends === null) return REDIRECT_TO_MAIN
+	console.log(profileWithFriends)
 	return {
 		props: {
-			profileInfo,
+			...profileWithFriends,
+			me: {
+				id: token.sub,
+			},
 		},
 	}
 }

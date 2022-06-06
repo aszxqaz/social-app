@@ -2,27 +2,16 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import NextImage from 'next/image'
 import React, { useContext } from 'react'
 import { DEFAULT_AVATAR } from '../../../content/images'
-import { CATEGORIES } from '../../../content/profile/categories'
 import { bottomHeaderTools, leftHeaderTools, rightHeaderTools } from '../../../content/profile/headerTools'
 import { ProfileContext } from '../../../pages/profile/[id]'
-import { ProfileInfo } from '../../../redux/features/userSlice'
 import ProfileToolsPanel from '../../icon-tools-panel/ProfileToolsPanel'
-import Categories from './Categories'
+import OnlineCircle from '../../Index/OnlineCircle'
 import { getLastSeen } from '../utils/lastSeen'
-
-// export interface ProfileHeaderProps {
-// 	image?: string
-// 	firstName: string
-// 	lastName: string
-//   images: string[]
-//   avatar: string
-// 	lastSeen: Date
-// }
 
 const RIGHT_ICONS_START = 0
 
 const ProfileHeader: React.FC = () => {
-	const { avatar, firstName, images, lastName, lastSeen } = useContext<ProfileInfo>(ProfileContext)
+	const { avatar, firstName, lastName, lastSeen, online } = useContext(ProfileContext)
 
 	let imgBoxSize
 	if (process.browser) {
@@ -52,13 +41,15 @@ const ProfileHeader: React.FC = () => {
 					justifyContent="space-between">
 					<Box backgroundColor="rgba(0,0,0,0.3)" rounded="md" px={3} py={1}>
 						<Heading size="md">{`${firstName} ${lastName}`}</Heading>
-						{lastSeen ? <Text>Last seen {getLastSeen(lastSeen)}</Text> : null}
+						{online ? (
+							<OnlineCircle title="Online" online={online} />
+						) : lastSeen ? (
+							<Text>Last seen {getLastSeen(lastSeen)}</Text>
+						) : null}
 					</Box>
 					<ProfileToolsPanel pr={2} gap={4} tools={bottomHeaderTools} />
 				</Flex>
 			</Box>
-
-		
 		</>
 	)
 }

@@ -47,8 +47,6 @@ export function FormikWrapperFactory<T>(): React.FC<FormikWrapperProps<T> & { ch
 	}) {
 		const validationSchema = validations ? Yup.object().shape(validations) : undefined
 		const Input = InputFactory<T>()
-		console.log('RERENDER: ')
-		console.log('FORMIK RERENDER')
 		return (
 			<>
 				<Heading letterSpacing={2} textTransform="uppercase" textAlign="center" colorScheme="green" mb={2} size="lg">

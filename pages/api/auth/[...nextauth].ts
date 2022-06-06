@@ -1,8 +1,8 @@
+import { verify } from 'argon2'
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
-import { userService } from '../../../typeorm'
-import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter'
-import { Redis } from '@upstash/redis'
+import { onlineService } from '../../../prisma/user/onlineService'
+import { userService } from '../../../prisma/user/userService'
 import { LOGIN_ROUTE } from '../../../routes'
 
 // const redis = new Redis({
@@ -22,16 +22,18 @@ export default NextAuth({
 			async authorize(credentials, req) {
 				if (!credentials) return null
 				const { email, password } = credentials
-        console.log(email)
-				const user = await userService.findUser([{ email }])
-        console.log(user)
+				const user = await userService.findUniqueWhere({ email })
 				if (!user) return null
-				if (user.password === credentials.password)
+
+				const verified = await verify(user.password, password)
+				if (verified) {
 					return {
-						name: `${user.firstName} ${user.lastName}`,
+						firstName: user.firstName,
+						lastName: user.lastName,
 						id: user.id,
-						image: user.images?.[0] || null,
+						image: user.avatar,
 					}
+				}
 				return null
 			},
 		}),
@@ -48,11 +50,13 @@ export default NextAuth({
 			// console.log(`profile: ${JSON.stringify(profile)}`)
 			// console.log(`isNewUser: ${JSON.stringify(isNewUser)}`)
 			// console.log(` `)
-			// if (user) {
-			// 	token.sub = user.id
-			// 	token.name = user.name
-			// 	token.picture = user.image
-			// }
+			if (user) {
+				token.sub = user.id
+				token.firstName = user.firstName
+
+				token.lastName = user.lastName
+				token.picture = user.image
+			}
 			return token
 		},
 		session: ({ session, user, token }) => {
@@ -64,6 +68,7 @@ export default NextAuth({
 			// if (token) {
 			// 	session.id = token.id
 			// }
+			if (token?.sub) onlineService.update(token.sub)
 			return session
 		},
 	},

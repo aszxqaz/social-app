@@ -7,7 +7,7 @@ export default async function sendFriendRequest(req: NextApiRequest, res: NextAp
 	if (!token || !token.sub) return res.status(401).end()
 	const { uid } = req.query
 
-	const isRequestSent = await followService.sendFriendRequest(token.sub, uid as string)
+	const isRequestSent = await followService.delete(token.sub, uid as string)
 
 	if (!isRequestSent) return res.status(400).end()
 	return res.status(200).end()

@@ -22,7 +22,6 @@ const AuthenticationPage: React.FC<AuthenticationPageProps> = ({ variant }) => {
 
 export const getServerSideProps: GetServerSideProps<AuthenticationPageProps> = async ({ req, query }) => {
 	const session = await getSession({ req })
-	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF page session: ', JSON.stringify(session))
 	let variant
 	if (query['variant'] === 'login' || query['variant'] === 'register')
 		variant = query['variant'] as 'login' | 'register'

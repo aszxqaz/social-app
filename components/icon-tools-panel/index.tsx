@@ -12,7 +12,6 @@ export type IconToolsPanelProps = {
 } & FlexProps
 
 export const IconToolsPanel = ({ tools, iconProps, toolBtnProps, ...flexProps }: IconToolsPanelProps) => {
-  console.log(tools)
 	return (
 		<FlexCenter {...flexProps}>
 			{tools.map((item) => {
@@ -26,7 +25,6 @@ export const IconToolsPanel = ({ tools, iconProps, toolBtnProps, ...flexProps }:
 				)
 
 				if (item?.link) {
-          console.log(item.link)
 					return (
 						<NextLink {...item.link} key={item.key}>
 							<Link userSelect="none">
