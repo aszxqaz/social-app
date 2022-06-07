@@ -1,7 +1,8 @@
-import { Flex } from '@chakra-ui/react'
+import { Divider, Flex } from '@chakra-ui/react'
 import { useContext } from 'react'
 import { CATEGORIES } from '../../content/profile/categories'
 import { ProfileContext } from '../../pages/profile/[id]'
+import Post from '../Post/Post'
 import AddFriendButton, { AddFriendButtonProps } from './sections/AddFriend/AddFriendButton'
 import AddFriendSection from './sections/AddFriend/AddFriendSection'
 import Categories from './sections/Categories'
@@ -18,16 +19,19 @@ const Profile: React.FC = () => {
 				<>
 					<Flex px={4} pt={6} gap={4}>
 						<AddFriendSection
-							px={"auto"}
+							px={'auto'}
 							flexGrow={10}
 							meId={me.id}
 							id={id}
 							friendRequests={friendRequests}
 							friends={friends}
 						/>
-						<OpenDialogButton flexGrow={8} px={"auto"} />
+						<OpenDialogButton flexGrow={8} px={'auto'} />
 					</Flex>
+					{/* <Divider /> */}
 					<Categories categories={CATEGORIES} />
+					{/* <Divider /> */}
+					<Post />
 				</>
 			) : null}
 		</>

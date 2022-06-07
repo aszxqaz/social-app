@@ -9,11 +9,11 @@ interface OnlineCircleProps {
 const OnlineCircle: React.FC<OnlineCircleProps> = ({ online, title }) => {
 	const circleStyle = online
 		? {
-				bg: 'linear-gradient(135deg, rgba(164,179,87,1) 0%, rgba(117,137,12,1) 100%);',
+				bg: 'linear-gradient(135deg, rgba(30,170,30,0.8) 0%, rgba(30,200,12,0.8) 100%);',
 				boxShadow: '1px 1px 5px 0px rgba(0,0,0,0.75);',
 		  }
 		: {
-				bg: 'linear-gradient(135deg, rgba(99,95,88,1) 0%, rgba(64,64,64,1) 100%);',
+				bg: 'linear-gradient(135deg, rgba(90,90,90,0.8) 0%, rgba(60,60,60,0.8) 100%);',
 				boxShadow: '1px 1px 5px 0px rgba(0,0,0,0.75);',
 		  }
 	return (

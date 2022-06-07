@@ -19,7 +19,7 @@ export const IconToolsPanel = ({ tools, iconProps, toolBtnProps, ...flexProps }:
 				const fontSize = (item?.scale || 1) * 2.2
 
 				const ToolIcon = () => (
-					<FlexCenter w="3rem" h="3rem" cursor="pointer" {...toolBtnProps}>
+					<FlexCenter w="3rem" h="3rem" cursor="pointer" onClick={item.handleClick} {...toolBtnProps}>
 						<Icon key={item.key} fontSize={`${fontSize}rem`} {...iconProps} />
 					</FlexCenter>
 				)

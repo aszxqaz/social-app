@@ -12,12 +12,10 @@ interface CategoriesProps {
 const Categories: React.FC<CategoriesProps> = ({ categories }) => {
 	const tileColors = [...TILE_COLORS]
 	return (
-		<Grid gridTemplateColumns="auto auto" gap={2} p={3}>
+		<Grid gridTemplateColumns="1fr 1fr" gap={2} p={3}>
 			{categories.map((category, i) => {
 				const { key, ...rest } = category
-				// const bg = {
-				//   bgColor: tileColors.splice(Math.round(Math.random() * (tileColors.length - 1)), 1)[0]
-				// }
+
 				return <TileCategory key={key} {...rest} />
 			})}
 		</Grid>

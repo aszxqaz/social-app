@@ -9,9 +9,7 @@ export const headerToolsContent: WithKey<IconToolsItem>[] = withKey<IconToolsIte
 	{
 		icon: RiTeamLine,
 		link: {
-			href: '/',
-			as: '/users',
-			shallow: true,
+			href: '/users',
 		},
 	},
 	{

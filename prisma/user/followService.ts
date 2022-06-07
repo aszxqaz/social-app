@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { prismaClient } from '../prismaClient'
 import { UserKey } from './types'
+import { userService } from './userService'
 
 class FollowService {
 	constructor(private prismaClient: PrismaClient) {}
@@ -140,6 +141,89 @@ class FollowService {
 			return null
 		}
 		return true
+	}
+
+	async getFriendsAndFriendRequests(userId: UserKey<'id'>) {
+		try {
+			const friends = await this.getFriendsList(userId)
+			const incomingRequests = await this.getIncomingRequests(userId)
+			const outcomingRequests = await this.getOutcomingRequests(userId)
+			return { friends, incomingRequests, outcomingRequests }
+		} catch (e) {
+			console.log(e)
+			return null
+		}
+	}
+
+	async getFriendsList(id: UserKey<'id'>) {
+		return await this.prismaClient.user.findMany({
+			where: {
+				OR: [
+					{
+						following: {
+							some: {
+								OR: [
+									{
+										followerId: id,
+									},
+									{
+										followingId: id,
+									},
+								],
+							},
+						},
+					},
+				],
+			},
+			select: {
+				id: true,
+				firstName: true,
+				lastName: true,
+				avatar: true,
+				online: true,
+				lastSeen: true,
+			},
+		})
+	}
+
+	async getOutcomingRequests(id: UserKey<'id'>) {
+		return await this.prismaClient.user.findMany({
+			where: {
+				followRequestsIn: {
+					some: {
+						senderId: id,
+					},
+				},
+			},
+			select: {
+				id: true,
+				firstName: true,
+				lastName: true,
+				avatar: true,
+				online: true,
+				lastSeen: true,
+			},
+		})
+	}
+
+	async getIncomingRequests(id: UserKey<'id'>) {
+		return await this.prismaClient.user.findMany({
+			where: {
+				followRequestsOut: {
+					some: {
+						receiverId: id,
+					},
+				},
+			},
+			select: {
+				id: true,
+				firstName: true,
+				lastName: true,
+				avatar: true,
+				online: true,
+				lastSeen: true,
+			},
+		})
 	}
 }
 

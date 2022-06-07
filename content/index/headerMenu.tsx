@@ -1,39 +1,19 @@
-import { IconType } from 'react-icons'
-import { RiEditLine, RiMore2Fill, RiRefreshLine, RiSearchLine } from 'react-icons/ri'
+import React from 'react'
 
-export type HEADER_MENU_ITEMS = 'Profile' | 'Feed' | 'Messages'
+export type HEADER_MENU_INDEX_PAGE_ITEMS = 'Home' | 'Feed' | 'Messages'
 
-interface HeaderMenuItem {
-	title: HEADER_MENU_ITEMS
-	active?: boolean
-	component: React.FC<{ active: boolean }>
+export type HeaderMenuOptions<T extends string> = {
+	currentActive: T
+} & {
+	[key in T]: {
+		component?: React.FC<{ active: boolean }>
+		onClick?: (...args: any[]) => any
+	}
 }
 
-export const headerMenuContent: HeaderMenuItem[] = [
-	{
-    active: true,
-		title: 'Profile',
-		component: () => <div>Profile Page</div>,
-	},
-	{
-		title: 'Feed',
-		component: () => <div>Profile Page</div>,
-	},
-	{
-		title: 'Messages',
-		component: () => <div>Profile Page</div>,
-	},
-]
-
-// interface HeaderMenuConstructorOptions {
-//   pages: HeaderMenuItem[]
-//   defaultCurrentPage: keyof pages
-// }
-
-// class HeaderMenu {
-//   public currentPage: HEADER_MENU_ITEMS
-
-//   constructor({ }) {
-//     this.currentPage = 'Profile'
-//   }
-// }
+export const headerMenu_IndexPage: HeaderMenuOptions<HEADER_MENU_INDEX_PAGE_ITEMS> = {
+	currentActive: 'Home',
+	Home: {},
+	Feed: {},
+	Messages: {},
+}

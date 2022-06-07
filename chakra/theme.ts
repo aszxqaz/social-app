@@ -1,6 +1,6 @@
 import { ChakraTheme, extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
-import { Button } from './componentStyleConfig'
+import { Button, Link } from './componentStyleConfig'
 
 const breakpoints = createBreakpoints({
 	sm: '40em',
@@ -14,19 +14,27 @@ const theme = {
 		initialColorMode: 'dark',
 		useSystemColorMode: false,
 	},
-  components: {
-    Button
-  },
+	components: {
+		Button,
+		Link,
+	},
 	styles: {
 		global: {
+			body: {
+				fontFamily: 'Nunito',
+				letterSpacing: 1.3,
+			},
+			a: {
+				textDecoration: 'none',
+			},
 			// '*': {
 			// 	fontFamily: 'Nunito',
 			// 	fontSize: '1.2rem',
 			// },
-      // form: {
-      //   fontFamily: 'Nunito',
+			// form: {
+			//   fontFamily: 'Nunito',
 			// 	fontSize: '1.2rem',
-      // }
+			// }
 		},
 	},
 	semanticTokens: {
