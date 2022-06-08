@@ -9,20 +9,18 @@ export const useClientRect = () => {
 		return [clientWidth, clientHeight]
 	}
 
-  
+	const onResize = useCallback(() => {
+		setClientRect(getClientRect())
+	}, [])
+
 	useEffect(() => {
-    const onResize = useCallback(() => {
-      setClientRect(getClientRect())
-    }, [])
 		window.addEventListener('resize', onResize)
 		return () => {
 			window.removeEventListener('resize', onResize)
 		}
-	}, [])
+	}, [onResize])
 
 	return [clientWidth, clientHeight]
 }
 
-export const useImages = () => {
-  
-}
+export const useImages = () => {}
