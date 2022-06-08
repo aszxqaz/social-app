@@ -1,5 +1,5 @@
 import { PrismaClient, User } from '@prisma/client'
-import { prismaClient } from '../prismaClient'
+import { prisma } from '../prismaClient'
 import { UserKey } from './types'
 
 export class OnlineService {
@@ -8,7 +8,7 @@ export class OnlineService {
 	constructor(private prismaClient: PrismaClient) {}
 
 	async update(userId: UserKey<'id'>) {
-		await prismaClient.user.update({
+		await prisma.user.update({
 			where: { id: userId },
 			data: {
 				lastSeen: new Date(),
@@ -17,7 +17,7 @@ export class OnlineService {
 		})
 		clearTimeout(this._map.get(userId))
 		const timeout = setTimeout(async () => {
-			await prismaClient.user.update({
+			await prisma.user.update({
 				where: { id: userId },
 				data: {
 					online: false,
@@ -29,4 +29,4 @@ export class OnlineService {
 	}
 }
 
-export const onlineService = new OnlineService(prismaClient)
+export const onlineService = new OnlineService(prisma)

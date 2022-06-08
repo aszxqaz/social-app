@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { prismaClient } from '../prismaClient'
+import { prisma } from '../prismaClient'
 import { UserKey } from './types'
 import { userService } from './userService'
 
@@ -189,7 +189,7 @@ class FollowService {
 	async getOutcomingRequests(id: UserKey<'id'>) {
 		return await this.prismaClient.user.findMany({
 			where: {
-				followRequestsIn: {
+				followRequestsOut: {
 					some: {
 						senderId: id,
 					},
@@ -209,7 +209,7 @@ class FollowService {
 	async getIncomingRequests(id: UserKey<'id'>) {
 		return await this.prismaClient.user.findMany({
 			where: {
-				followRequestsOut: {
+				followRequestsIn: {
 					some: {
 						receiverId: id,
 					},
@@ -227,4 +227,4 @@ class FollowService {
 	}
 }
 
-export const followService = new FollowService(prismaClient)
+export const followService = new FollowService(prisma)

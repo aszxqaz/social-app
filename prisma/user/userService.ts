@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient, User } from '@prisma/client'
-import { prismaClient, Without } from '../prismaClient'
+import { prisma, Without } from '../prismaClient'
 import { followService } from './followService'
 import { Data, Field, UserKey, Relation } from './types'
 
@@ -78,4 +78,4 @@ class UserService {
 	}
 }
 
-export const userService = new UserService(prismaClient)
+export const userService = new UserService(prisma)

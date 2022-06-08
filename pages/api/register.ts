@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { SignUpData } from '../../components/authentication/content'
-import { prismaClient } from '../../prisma/prismaClient'
+import { prisma } from '../../prisma/prismaClient'
 import { userService } from '../../prisma/user/userService'
 import { hash } from 'argon2'
 
@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const { email, firstName, lastName, password } = req.body
 
 	// const emailInUse = await userService.findUser({ email })
-	const emailInUse = await prismaClient.user.findUnique({ where: { email } })
+	const emailInUse = await prisma.user.findUnique({ where: { email } })
 
 	if (emailInUse)
 		return res.status(400).json({
@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const hashed = await hash(password, { saltLength: 10 })
 
-	const created = await prismaClient.user.create({ data: { email, firstName, lastName, password: hashed } })
+	const created = await prisma.user.create({ data: { email, firstName, lastName, password: hashed } })
 
 	// await userService.createUser({
 	// 	email,

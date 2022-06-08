@@ -17,6 +17,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/registerNew"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/registerNew", "components/Gallery/useImages.tsxx"],
   "exclude": ["node_modules"]
 }

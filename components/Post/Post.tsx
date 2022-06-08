@@ -1,4 +1,4 @@
-import { Text, Box, Flex, Center } from '@chakra-ui/react'
+import { Text, Box, Flex, Center, Image as ChakraI } from '@chakra-ui/react'
 import React from 'react'
 import { DEFAULT_AVATAR } from '../../content/images'
 import Image from 'next/image'
@@ -72,12 +72,43 @@ const Post: React.FC<PostProps> = ({}) => {
 							objectFit="cover"
 							alt=""
 							onClick={function (e) {
-                const img = document.appendChild(e.currentTarget)
-                
-								img.style.width = "100%"
-                img.style.position = "absolute"
-                img.style.left = "0"
-                img.style.right = "0"
+								const img = e.currentTarget
+								let scale = 1
+                let initialWidth = img.width
+                let initialHeight = img.height
+								img.addEventListener('wheel', (e) => {
+									e.preventDefault()
+                  img.style.objectFit = "none"
+                  img.style.maxWidth = "300%"
+                  img.style.maxHeight = "300%"
+									// console.log(`delta Y : `, e.deltaY)
+									// console.log(`delta Z: `, e.deltaZ)
+									// console.log(`clientX: `, e.clientX)
+									// console.log(`clientY: `, e.clientY)
+									// console.log(`offsetX: `, e.offsetX)
+									// console.log(`offsetY: `, e.offsetY)
+									// console.log(`movementX: `, e.movementX)
+									// console.log(`movementY: `, e.movementY)
+                  // @ts-ignore
+									scale += e.deltaY * -0.01
+
+									// Restrict scale
+									scale = Math.min(Math.max(0.125, scale), 4)
+
+									// Apply scale transform
+									// img.style.transform = `scale(${scale})`
+                  img.style.width = (initialWidth * scale).toString() + "px"
+                  img.style.height = (initialHeight * scale).toString() + "px"
+                  console.log(img.width)
+                  console.log(img.height)
+								})
+								document.body.style.overflow = 'hidden'
+								img.style.width = '100%'
+								img.style.height = '100%'
+								img.style.objectFit = 'contain'
+								img.style.background = 'rgba(0,0,0,0.8)'
+								img.style.position = 'fixed'
+								img.style.zIndex = '99'
 							}}
 						/>
 					</Flex>
